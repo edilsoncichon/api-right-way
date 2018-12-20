@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Api\Categories;
 
-use App\Domains\Category\CategoryRepository;
+use App\Domains\Category\CategoryRepository as Repository;
+use App\Domains\Category\CategoryTransformer as Transformer;
 use App\Http\Controllers\Api\ApiController;
-use Illuminate\Http\Response;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\Collection;
 
 class ListCategories extends ApiController
 {
-    public function __invoke(Response $response, CategoryRepository $repository)
+    public function __invoke(Repository $repository, Transformer $transformer)
     {
-        return $repository->getAll();
+        $paginator = $repository->getPaginator();
+        $items = $paginator->items();
+        $resource = new Collection($items, $transformer);
+        $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+        return $this->fractalManager->createData($resource)->toJson();
     }
 }
