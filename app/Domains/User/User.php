@@ -1,14 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Domains\User;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class User extends Authenticatable
+class User
 {
-    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
