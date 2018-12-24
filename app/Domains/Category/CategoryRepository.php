@@ -16,4 +16,15 @@ class CategoryRepository extends Repository
     {
         return $this->queryBuilder->paginate($perPage ?? $this->perPage);
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model|null
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function getById(int $id)
+    {
+        return $this->queryBuilder->findOrFail($id);
+    }
 }
