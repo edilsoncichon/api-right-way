@@ -2,7 +2,7 @@
 
 namespace App\Domains\Category;
 
-use App\Support\Repository;
+use App\Domains\Repository;
 
 class CategoryRepository extends Repository
 {

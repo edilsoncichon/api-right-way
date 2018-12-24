@@ -1,6 +1,7 @@
 <?php
 
-// INACTIVATED!
+// INACTIVATED AT 12/22/2018!
+
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
