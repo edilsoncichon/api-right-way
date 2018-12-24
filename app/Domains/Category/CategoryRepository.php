@@ -27,4 +27,19 @@ class CategoryRepository extends Repository
     {
         return $this->queryBuilder->findOrFail($id);
     }
+
+    /**
+     * @param int $id
+     * @return bool
+     *
+     * @throws \Exception
+     */
+    public function deleteById(int $id)
+    {
+        $domain = $this->getById($id);
+        if ($domain->delete() === false) {
+            throw new \Exception('Model was not deleted.');
+        }
+        return true;
+    }
 }

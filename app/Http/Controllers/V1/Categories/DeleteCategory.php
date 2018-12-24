@@ -6,15 +6,14 @@ use App\Domains\Category\CategoryRepository as Repository;
 use App\Domains\Category\CategoryTransformer as Transformer;
 use App\Http\Controllers\V1\ApiController;
 use Illuminate\Http\Request;
-use League\Fractal\Resource\Item;
 
-class GetCategory extends ApiController
+class DeleteCategory extends ApiController
 {
     /**
      * @param Request $request
      * @param Repository $repository
      * @param Transformer $transformer
-     * @return string
+     * @return array
      * @throws \Exception
      */
     public function __invoke(
@@ -26,8 +25,7 @@ class GetCategory extends ApiController
         if ($id == 0) {
             throw new \Exception('Parameter ID is required and should be integer value.');
         }
-        $item = $repository->getById($id);
-        $resource = new Item($item, $transformer);
-        return $this->fractalManager->createData($resource)->toJson();
+        $repository->deleteById($id);
+        return ['message' => 'Deleted with successfull!'];
     }
 }
