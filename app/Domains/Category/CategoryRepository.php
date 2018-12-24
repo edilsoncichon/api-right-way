@@ -42,4 +42,13 @@ class CategoryRepository extends Repository
         }
         return true;
     }
+
+    /**
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function create(array $data)
+    {
+        return $this->queryBuilder->create($data);
+    }
 }
