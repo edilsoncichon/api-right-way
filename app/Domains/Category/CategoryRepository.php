@@ -51,4 +51,14 @@ class CategoryRepository extends Repository
     {
         return $this->queryBuilder->create($data);
     }
+
+    /**
+     * @param array $data
+     * @return bool|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function update(array $data)
+    {
+        $model = $this->getById($data['id']);
+        return $model->update($data) ? $model : false;
+    }
 }
