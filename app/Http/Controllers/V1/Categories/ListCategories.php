@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\Categories;
+namespace App\Http\Controllers\V1\Categories;
 
 use App\Domains\Category\CategoryRepository as Repository;
 use App\Domains\Category\CategoryTransformer as Transformer;
-use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\V1\ApiController;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;
 

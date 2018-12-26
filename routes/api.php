@@ -1,23 +1,15 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Api\Categories\ListCategories;
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+use App\Http\Controllers\V1\Categories\ListCategories;
+use App\Http\Controllers\V1\Categories\GetCategory;
+use App\Http\Controllers\V1\Categories\DeleteCategory;
+use App\Http\Controllers\V1\Categories\CreateCategory;
+use App\Http\Controllers\V1\Categories\UpdateCategory;
 
 
 Route::get('/categories', ListCategories::class);
+Route::get('/categories/{id}', GetCategory::class);
+Route::delete('/categories/{id}', DeleteCategory::class);
+Route::post('/categories', CreateCategory::class);
+Route::put('/categories', UpdateCategory::class);

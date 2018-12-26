@@ -44,6 +44,8 @@ services:
     links:
       - mysql
       - cache
+    environment:
+      - XDEBUG_ENABLED=true
 
   # Laravel Queues
   queue:
