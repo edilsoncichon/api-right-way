@@ -6,7 +6,6 @@ use App\Domains\Category\CategoryRepository as Repository;
 use App\Domains\Category\CategoryTransformer as Transformer;
 use App\Domains\Category\Validations\UpdateCategory as Validator;
 use App\Http\Controllers\V1\ApiController;
-use League\Fractal\Resource\Item;
 
 class UpdateCategory extends ApiController
 {
@@ -22,7 +21,6 @@ class UpdateCategory extends ApiController
         Transformer $transformer
     ){
         $item = $repository->update($validator->all());
-        $resource = new Item($item, $transformer);
-        return $this->fractalManager->createData($resource)->toJson();
+        return $this->createResponseItem($item, $transformer);
     }
 }

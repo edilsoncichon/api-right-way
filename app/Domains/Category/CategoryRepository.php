@@ -12,7 +12,7 @@ class CategoryRepository extends Repository
      * @param int|null $perPage
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getPaginator(int $perPage = null)
+    public function getItemsPaginated(int $perPage = null)
     {
         return $this->queryBuilder->paginate($perPage ?? $this->perPage);
     }
