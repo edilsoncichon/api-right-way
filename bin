@@ -1,0 +1,30 @@
+#!/bin/bash
+
+######################################################
+#                Command utils                       #
+######################################################
+
+SERVICE_NAME=app #Replace for your service name.
+
+if [[ $1 = "artisan" ]]
+then
+    docker-compose exec ${SERVICE_NAME} php $@; exit;
+fi
+
+if [[ $1 = "composer" ]]
+then
+    docker-compose exec ${SERVICE_NAME} $@; exit;
+fi
+
+if [[ $1 = "up" ]]
+then
+    docker-compose $@; exit;
+fi
+
+if [[ $1 = "down" ]]
+then
+    docker-compose $@; exit;
+fi
+
+# Run anything in container.
+docker-compose exec ${SERVICE_NAME} $@
