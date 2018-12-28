@@ -4,6 +4,7 @@ namespace App\Domains\User\Console;
 
 use App\Domains\User\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUserCommand extends Command
 {
@@ -36,7 +37,7 @@ class CreateUserCommand extends Command
             $this->error('No field can be empty!');
             return;
         }
-        $data['password'] = bcrypt($data['password']);
+        $data['password'] = Hash::make($data['password']);
 
         User::query()->create($data);
         $this->info('User created successfully!');
