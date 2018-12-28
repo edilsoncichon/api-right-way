@@ -36,12 +36,6 @@ return [
     */
 
     'guards' => [
-// TODO REMOVE!
-//        'web' => [
-//            'driver' => 'session',
-//            'provider' => 'users',
-//        ],
-
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
