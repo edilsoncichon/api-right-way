@@ -23,6 +23,6 @@ class DeleteCategory extends ApiController
         Transformer $transformer
     ){
         $repository->deleteById($request->id);
-        return $this->createResponseSuccess(__('messages.deleted'));
+        return $this->getResponseMessage(__('messages.deleted'));
     }
 }

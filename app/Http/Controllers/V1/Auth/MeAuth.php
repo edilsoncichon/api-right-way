@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\V1\ApiController;
+use Illuminate\Support\Facades\Auth;
 
 class MeAuth extends ApiController
 {
@@ -13,6 +14,6 @@ class MeAuth extends ApiController
      */
     public function __invoke()
     {
-        return response()->json(auth()->user());
+        return $this->response->setData(Auth::user());
     }
 }
