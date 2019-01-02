@@ -139,7 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-//        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -170,7 +170,7 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-//        App\Providers\AuthServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
 //        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -192,7 +192,7 @@ return [
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
-//        'Auth' => Illuminate\Support\Facades\Auth::class,
+        'Auth' => Illuminate\Support\Facades\Auth::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
@@ -203,7 +203,7 @@ return [
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
-//        'Gate' => Illuminate\Support\Facades\Gate::class,
+        'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,

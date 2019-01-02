@@ -72,13 +72,14 @@ abstract class ApiController extends CoreController
     /**
      * @param string $message
      * @param string|null $user_message
+     * @param int $code
      * @return JsonResponse
      */
-    protected function createResponseSuccess(string $message, string $user_message = null)
+    protected function getResponseMessage(string $message, string $user_message = null, int $code = 200)
     {
         return $this->response->setData([
             'message' => $message,
             'user_message' => $user_message ?? $message,
-        ]);
+        ])->setStatusCode($code);
     }
 }
