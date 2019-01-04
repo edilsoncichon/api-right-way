@@ -16,6 +16,11 @@ then
     docker-compose exec ${SERVICE_NAME} $@; exit;
 fi
 
+if [[ $1 = "phpunit" ]]
+then
+    docker-compose exec ${SERVICE_NAME} vendor/bin/$@; exit;
+fi
+
 if [[ $1 = "up" ]]
 then
     docker-compose $@; exit;
