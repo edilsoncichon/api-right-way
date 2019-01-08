@@ -18,9 +18,20 @@ trait JwtAuthentication
     public function actingAs(Authenticatable $user, $driver = null)
     {
         if (method_exists($this, 'withHeader')) {
-            $token = JWTAuth::fromUser($user);
-            $this->withHeader('Authorization', 'Bearer '.$token);
+            $token = $this->getTokenFromUser($user);
+            $this->addAuthBearer($token);
         }
+        return $this;
+    }
+
+    protected function getTokenFromUser($user)
+    {
+        return JWTAuth::fromUser($user);
+    }
+
+    protected function addAuthBearer(string $token)
+    {
+        $this->withHeader('Authorization', 'Bearer '.$token);
         return $this;
     }
 }
