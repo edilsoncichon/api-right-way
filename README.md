@@ -9,7 +9,7 @@ This project is a small example of a REST API, built on good development practic
 * [Coming soon] API Documented with [Swager](https://swagger.io/docs/)
 * The architecture tends to [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
 * [Single action Controllers](https://laravel.com/docs/5.7/controllers#single-action-controllers)
-* Code coverage by tests with [PHPUnit](https://phpunit.de/)
+* Code coverage by tests with [PHPUnit](https://phpunit.de/) - [See the code coverage HTML report](https://cichondev.github.io/api-right-way/)
 * Docker for dev environment with [Ambientum](https://github.com/codecasts/ambientum)
 
 
