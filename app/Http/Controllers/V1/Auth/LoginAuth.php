@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Domains\Auth\AuthService;
+use App\Domains\Auth\Validations\LoginValidator;
 use App\Http\Controllers\V1\ApiController;
-use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
 
 class LoginAuth extends ApiController
@@ -12,11 +12,11 @@ class LoginAuth extends ApiController
     /**
      * Get a JWT via given credentials.
      *
-     * @param Request $request
+     * @param LoginValidator $request
      * @param AuthService $service
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request, AuthService $service)
+    public function __invoke(LoginValidator $request, AuthService $service)
     {
         $credentials = $request->only(['email', 'password']);
         try {
