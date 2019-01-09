@@ -1,0 +1,377 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This project is a small example of a REST API, built on good development practices. [See the source code here](https://github.com/cichondev/api-right-way).",
+    "version" : "1.0.0",
+    "title" : "API in the Right Way",
+    "contact" : {
+      "email" : "edilsoncichon@hotmail.com"
+    },
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://choosealicense.com/licenses/mit/"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/api-right-way/API-RIGHT-WAY/1.0.0",
+  "tags" : [ {
+    "name" : "auth",
+    "description" : "Manage Access Tokens for users."
+  }, {
+    "name" : "categories",
+    "description" : "Management of Categories"
+  }, {
+    "name" : "products",
+    "description" : "Management of Products (coming soon)"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/auth/login" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "creates an Access Token",
+        "description" : "Create an Access Token from a user's credentials.",
+        "operationId" : "createAccessToken",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "credentials",
+          "description" : "Credentials from user",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Credentials"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "access token created",
+            "schema" : {
+              "$ref" : "#/definitions/TokenMetadata"
+            }
+          },
+          "403" : {
+            "description" : "forbidden, invalid credentials"
+          },
+          "422" : {
+            "description" : "invalid inputs"
+          }
+        }
+      }
+    },
+    "/auth/logout" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "invalid an Access Token",
+        "description" : "Invalid an Access Token.",
+        "operationId" : "invalidAccessToken",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "access token invalidated"
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      }
+    },
+    "/auth/refresh" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "refresh an Access Token",
+        "description" : "Refresh an Access Token.",
+        "operationId" : "refreshAccessToken",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "access token refreshed",
+            "schema" : {
+              "$ref" : "#/definitions/TokenMetadata"
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      }
+    },
+    "/auth/me" : {
+      "get" : {
+        "tags" : [ "auth" ],
+        "summary" : "get user from Access Token",
+        "description" : "Get User from Access Token.",
+        "operationId" : "getUserFromToken",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      }
+    },
+    "/categories" : {
+      "get" : {
+        "tags" : [ "categories" ],
+        "summary" : "get all Categories",
+        "description" : "Get all Categories paginated.",
+        "operationId" : "getAllCategories",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page number",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Category"
+              }
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "categories" ],
+        "summary" : "create Category",
+        "description" : "Create Category",
+        "operationId" : "createCategory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "category_data",
+          "description" : "Category data (id isn't required)",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Category"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Category"
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          },
+          "422" : {
+            "description" : "invalid inputs"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "categories" ],
+        "summary" : "update Category",
+        "description" : "Update Category",
+        "operationId" : "updateCategory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "category_data",
+          "description" : "Category data",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Category"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Category"
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          },
+          "422" : {
+            "description" : "invalid inputs"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      }
+    },
+    "/categories/{id}" : {
+      "get" : {
+        "tags" : [ "categories" ],
+        "summary" : "get one Category",
+        "description" : "Get Category",
+        "operationId" : "getCategory",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Category ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Category"
+            }
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "categories" ],
+        "summary" : "delete one Category",
+        "description" : "Delete one Category",
+        "operationId" : "deleteCategory",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Category ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "401" : {
+            "description" : "unauthorized, token invalid or not supplied"
+          }
+        },
+        "security" : [ {
+          "bearer_token" : [ ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "bearer_token" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "User" : {
+      "type" : "object",
+      "required" : [ "email", "id", "name", "password" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 99999
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Klark kent"
+        },
+        "email" : {
+          "type" : "string",
+          "format" : "email",
+          "example" : "klarkkent@example.com"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "admin123"
+        }
+      }
+    },
+    "Category" : {
+      "type" : "object",
+      "required" : [ "id", "name", "name_slug" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 99999
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Widget Adapter"
+        },
+        "name_slug" : {
+          "type" : "string",
+          "example" : "Widget Adapter"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Contrary to popular belief, Lorem Ipsum is not simply random text."
+        }
+      }
+    },
+    "Credentials" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "admin@example.com"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "admin123"
+        }
+      }
+    },
+    "TokenMetadata" : {
+      "type" : "object",
+      "properties" : {
+        "access_token" : {
+          "type" : "string",
+          "example" : "eyJ0eXAi.e5NmQ2OTM2ZCJ9.NMj8-38Iz_J86jS_By08"
+        },
+        "token_type" : {
+          "type" : "string",
+          "example" : "bearer"
+        },
+        "expires_in" : {
+          "type" : "integer",
+          "example" : 3600
+        }
+      }
+    }
+  },
+  "responses" : {
+    "UnauthorizedError" : {
+      "description" : "unauthorized, token invalid or not supplied"
+    }
+  }
+}

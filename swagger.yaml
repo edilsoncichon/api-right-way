@@ -1,0 +1,307 @@
+swagger: '2.0'
+info:
+  description: This project is a small example of a REST API, built on good development practices. [See the source code here](https://github.com/cichondev/api-right-way).
+  version: "1.0.0"
+  title: API in the Right Way
+  # put the contact info for your development or API team
+  contact:
+    email: edilsoncichon@hotmail.com
+
+  license:
+    name: MIT
+    url: https://choosealicense.com/licenses/mit/
+
+# tags are used for organizing operations
+tags:
+- name: auth
+  description: Manage Access Tokens for users.
+- name: categories
+  description: Management of Categories
+- name: products
+  description: Management of Products (coming soon)
+
+paths:
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: creates an Access Token
+      operationId: createAccessToken
+      description: Create an Access Token from a user's credentials.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: credentials
+        description: Credentials from user
+        required: true
+        schema:
+          $ref: '#/definitions/Credentials'
+      responses:
+        200:
+          description: access token created
+          schema:
+            $ref: '#/definitions/TokenMetadata'
+        403:
+          description: forbidden, invalid credentials
+        422:
+          description: invalid inputs
+  /auth/logout:
+    post:
+      tags:
+      - auth
+      summary: invalid an Access Token
+      operationId: invalidAccessToken
+      description: Invalid an Access Token.
+      produces:
+        - application/json
+      security: 
+        - bearer_token: []
+      responses:
+        200:
+          description: access token invalidated
+        401:
+          description: unauthorized, token invalid or not supplied
+  /auth/refresh:
+    post:
+      tags:
+      - auth
+      summary: refresh an Access Token
+      operationId: refreshAccessToken
+      description: Refresh an Access Token.
+      produces:
+        - application/json
+      security: 
+        - bearer_token: []
+      responses:
+        200:
+          description: access token refreshed
+          schema:
+            $ref: '#/definitions/TokenMetadata'
+        401:
+          description: unauthorized, token invalid or not supplied
+  /auth/me:
+    get:
+      tags:
+      - auth
+      summary: get user from Access Token
+      operationId: getUserFromToken
+      description: Get User from Access Token.
+      produces:
+        - application/json
+      security: 
+        - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        401:
+          $ref: '#/responses/UnauthorizedError'
+  
+  /categories:
+    get:
+      tags:
+      - categories
+      summary: get all Categories
+      operationId: getAllCategories
+      description: Get all Categories paginated.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: page
+        type: integer
+        description: Page number
+      security: 
+       - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        401:
+          $ref: '#/responses/UnauthorizedError'
+    post:
+      tags:
+      - categories
+      summary: create Category
+      operationId: createCategory
+      description: Create Category
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: category_data
+        description: Category data (id isn't required)
+        schema:
+          $ref: '#/definitions/Category'
+      security: 
+       - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Category'
+        401:
+          $ref: '#/responses/UnauthorizedError'
+        422:
+          description: invalid inputs
+    put:
+      tags:
+      - categories
+      summary: update Category
+      operationId: updateCategory
+      description: Update Category
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: category_data
+        description: Category data
+        schema:
+          $ref: '#/definitions/Category'
+      security: 
+       - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Category'
+        401:
+          $ref: '#/responses/UnauthorizedError'
+        422:
+          description: invalid inputs
+  /categories/{id}:
+    get:
+      tags:
+      - categories
+      summary: get one Category
+      operationId: getCategory
+      description: Get Category
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true
+        description: Category ID
+      security: 
+       - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Category'
+        401:
+          $ref: '#/responses/UnauthorizedError'
+    delete:
+      tags:
+      - categories
+      summary: delete one Category
+      operationId: deleteCategory
+      description: Delete one Category
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true
+        description: Category ID
+      security: 
+       - bearer_token: []
+      responses:
+        200:
+          description: successful operation
+        401:
+          $ref: '#/responses/UnauthorizedError'
+
+responses:
+  UnauthorizedError:
+    description: unauthorized, token invalid or not supplied
+
+definitions:
+  User:
+    type: object
+    required:
+    - id
+    - name
+    - email
+    - password
+    properties:
+      id:
+        type: integer
+        example: 99999
+      name:
+        type: string
+        example: Klark kent
+      email:
+        type: string
+        format: email
+        example:  klarkkent@example.com
+      password:
+        type: string
+        example: admin123
+  Category:
+    type: object
+    required:
+    - id
+    - name
+    - name_slug
+    properties:
+      id:
+        type: integer
+        example: 99999
+      name:
+        type: string
+        example: Widget Adapter
+      name_slug:
+        type: string
+        example: Widget Adapter
+      description:
+        type: string
+        example: Contrary to popular belief, Lorem Ipsum is not simply random text.
+  Credentials:
+    type: object
+    properties:
+      email:
+        type: string
+        example: admin@example.com
+      password:
+        type: string
+        example: admin123
+  TokenMetadata:
+    type: object
+    properties:
+      access_token:
+        type: string
+        example: eyJ0eXAi.e5NmQ2OTM2ZCJ9.NMj8-38Iz_J86jS_By08
+      token_type:
+        type: string
+        example: bearer
+      expires_in:
+        type: integer
+        example: 3600
+        
+securityDefinitions:
+  bearer_token:
+    type: apiKey
+    in: header
+    name: Authorization
+
+schemes:
+ - https
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /api-right-way/API-RIGHT-WAY/1.0.0

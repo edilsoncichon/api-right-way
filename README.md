@@ -6,7 +6,7 @@ This project is a small example of a REST API, built on good development practic
 
 * Implements Resources and Transformers with [Fractal](https://fractal.thephpleague.com/)
 * [Coming soon] Query string language to filter, paginate and sort the returned collections.
-* [Coming soon] API Documented with [Swager](https://swagger.io/docs/)
+* [In progress] [API Documentation](https://app.swaggerhub.com/apis-docs/api-right-way/API-RIGHT-WAY/1.0.0) with [Swager](https://swagger.io/docs/).
 * The architecture tends to [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
 * [Single action Controllers](https://laravel.com/docs/5.7/controllers#single-action-controllers)
 * Code coverage by tests with [PHPUnit](https://phpunit.de/) - [See the code coverage HTML report](https://cichondev.github.io/api-right-way/)
