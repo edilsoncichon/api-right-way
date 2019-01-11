@@ -61,6 +61,9 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "vendor/bin/phpunit",
-        "coverage-html": "vendor/bin/phpunit --coverage-html=./docs/code-coverage"
+        "coverage-html": [
+            "rm -rf ./docs/code-coverage/*",
+            "vendor/bin/phpunit --coverage-html=./docs/code-coverage"
+        ]
     }
 }
