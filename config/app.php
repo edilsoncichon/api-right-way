@@ -221,6 +221,7 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
+        'GraphQL' => Rebing\GraphQL\Support\Facades\GraphQL::class,
 
     ],
 
