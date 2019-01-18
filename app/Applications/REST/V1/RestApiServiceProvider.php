@@ -7,14 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RestApiServiceProvider extends ServiceProvider
 {
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Applications\REST\V1\Http\Controllers';
+    protected $routes_path = 'app/Applications/REST/V1/Http/routes.php';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -49,6 +42,6 @@ class RestApiServiceProvider extends ServiceProvider
     {
         Route::prefix('v1')
             ->middleware('api')
-            ->group(base_path('app/Applications/REST/V1/Http/routes.php'));
+            ->group(base_path($this->routes_path));
     }
 }
