@@ -167,14 +167,17 @@ return [
          */
 
         /*
-         * Application Service Providers...
+         * Application Core Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-//        App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Core\Providers\AppServiceProvider::class,
+        App\Core\Providers\AuthServiceProvider::class,
+//        App\Core\Providers\BroadcastServiceProvider::class,
+        App\Core\Providers\EventServiceProvider::class,
 
+        /*
+         * Applications Service Providers...
+         */
+        App\Applications\REST\V1\RestApiServiceProvider::class,
     ],
 
     /*
