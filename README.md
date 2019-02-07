@@ -5,12 +5,12 @@ This project is a small example of a API, built on good development practices.
 ## Features
 
 * REST endpoints;
-* [GraphQL](https://graphql.org/learn/)
-* Implements Resources and Transformers with [Fractal](https://fractal.thephpleague.com/)
-* [Coming soon] Query string language to filter, paginate and sort the returned collections.
-* [API Documentation](https://app.swaggerhub.com/apis-docs/api-right-way/API-RIGHT-WAY/1.0.0) with [Swager](https://swagger.io/docs/).
+* [Coming soon] [GraphQL](https://graphql.org/learn/)
+* Implements Resources and Transformers with [Fractal](https://fractal.thephpleague.com/) (REST)
+* [Coming soon] Query string language to filter, paginate and sort the returned collections. (REST)
+* [API Documentation](https://app.swaggerhub.com/apis-docs/api-right-way/API-RIGHT-WAY/1.0.0) with [Swager](https://swagger.io/docs/). (REST)
 * [Domain Driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
-* [Single action Controllers](https://laravel.com/docs/5.7/controllers#single-action-controllers)
+* [Single action Controllers](https://laravel.com/docs/5.7/controllers#single-action-controllers) (REST)
 * Code coverage by tests with [PHPUnit](https://phpunit.de/) - [See the code coverage HTML report](https://cichondev.github.io/api-right-way/code-coverage)
 * Docker for dev environment with [Ambientum](https://github.com/codecasts/ambientum)
 
