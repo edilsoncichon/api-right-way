@@ -1,9 +1,11 @@
 # API in the right way
 
-This project is a small example of a REST API, built on good development practices.
+This project is a small example of a API, built on good development practices.
 
 ## Features
 
+* REST endpoints;
+* [GraphQL](https://graphql.org/learn/)
 * Implements Resources and Transformers with [Fractal](https://fractal.thephpleague.com/)
 * [Coming soon] Query string language to filter, paginate and sort the returned collections.
 * [API Documentation](https://app.swaggerhub.com/apis-docs/api-right-way/API-RIGHT-WAY/1.0.0) with [Swager](https://swagger.io/docs/).
